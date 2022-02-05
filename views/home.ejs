@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <style type="text/css" media="screen">
+      body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-family: "poppins";
+        background-color: #f1f1f1;
+      }
+      fieldset {
+        width: 70%;
+        padding: 20px;
+      }
+      .card {
+        padding: 10px;
+        margin: 10px;
+        color: #fff;
+      }
+      .card-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      h4 {
+        font-size: 18px;
+        padding-top: 1rem;
+        color: #fff;
+      }
+      .get {
+        background-color: rgb(80, 80, 80);
+      }
+      .put {
+        background-color: rgb(0, 152, 172);
+      }
+      .post {
+        background-color: #5c5;
+      }
+      .delete {
+        background-color: rgb(201, 21, 45);
+      }
+    </style>
+  </head>
+
+  <body>
+    <fieldset>
+      <h3 class="text-center">Post requests</h3>
+      <div class="container"></div>
+    </fieldset>
+  </body>
+  <script>
+    const endpoints = [
+      { route: "/admin/profile/:id", type: "get" },
+      { route: "/admin/profile/password", type: "post" },
+      { route: "/admin/profile/update/:id", type: "put" },
+      { route: "/user/profile/:id", type: "get" },
+      { route: "/user/profile/password", type: "post" },
+      { route: "/user/profile/update/:id", type: "put" },
+      { route: "/product", type: "get" },
+      { route: "/product/create", type: "post" },
+      { route: "/product/update/:id", type: "put" },
+      { route: "/product/delete/:id", type: "delete" },
+      { route: "/order", type: "get" },
+      { route: "/order/create", type: "post" },
+      { route: "/order/update/:id", type: "put" },
+      { route: "/sales", type: "get" },
+      { route: "/sales/create", type: "post" },
+      { route: "/sales/update/:id", type: "put" },
+      { route: "/billing", type: "get" },
+      { route: "/billing/create", type: "post" },
+      { route: "/phone", type: "get" },
+      { route: "/phone/create", type: "post" },
+      { route: "/policy", type: "get" },
+      { route: "/policy/create", type: "post" },
+    ];
+
+    const container = document.querySelector(".container");
+
+    endpoints.forEach((endpoint) => {
+      const card = document.createElement("div");
+      const cardBody = document.createElement("div");
+      const h4 = document.createElement("h4");
+      const button = document.createElement("button");
+      card.classList.add("card");
+      button.classList.add("btn", "btn-dark");
+      cardBody.classList.add("card-body");
+      card.classList.add(`${endpoint.type}`);
+
+      h4.textContent = endpoint.route;
+      button.textContent = endpoint.type;
+      cardBody.append(h4, button);
+      card.appendChild(cardBody);
+      container.append(card);
+    });
+  </script>
+</html>
