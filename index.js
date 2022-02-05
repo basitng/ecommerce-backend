@@ -17,7 +17,7 @@ app.use(cookieParser());
 dotenv.config();
 
 // CONFIGURATIONS
-const PORT = 5000;
+const PORT = 5001;
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
