@@ -25,7 +25,7 @@ mongoose
   })
   .then(() => {
     console.log("Database Connected  Successfully");
-    app.listen(Pprocess.env.PORT || PORT, () =>
+    app.listen(process.env.PORT || PORT, () =>
       console.log("Server started at port", PORT)
     );
   })
