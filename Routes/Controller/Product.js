@@ -21,7 +21,7 @@ module.exports.product = async (req, res) => {
       backPic,
       otherPic,
     });
-    res.setHeader("Content-Type", "multipart/form-data");
+    // res.setHeader("Content-Type", "multipart/form-data");
     res.status(200).json(data);
   } catch (error) {
     res.status(400).json(error);

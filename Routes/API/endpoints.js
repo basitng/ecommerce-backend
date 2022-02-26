@@ -41,13 +41,13 @@ AllAPI.get("/", apiEndpoints);
 AllAPI.get("/product/find/:id", findProduct);
 AllAPI.post("/product/create", VerifyAdmin, upload.array("image"), product);
 
-// AllAPI.get("/product", getProduct);
-// AllAPI.put("/product/update/:id", VerifyAdmin, updateProduct);
-// AllAPI.delete(
-//   "/product/delete/:id",
-//   VerifyTokenAndAuthorization,
-//   deleteProduct
-// );
+AllAPI.get("/product", getProduct);
+AllAPI.put("/product/update/:id", VerifyAdmin, updateProduct);
+AllAPI.delete(
+  "/product/delete/:id",
+  VerifyTokenAndAuthorization,
+  deleteProduct
+);
 
 // Order
 AllAPI.get("/order/", order);
