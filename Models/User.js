@@ -17,7 +17,7 @@ const UserSchema = mongoose.Schema(
     totalOrder: { type: [] },
     isAdmin: { type: Boolean, default: false },
     location: { type: String },
-    shipping_address: { type: String },
+    address: { type: String },
     postal_code: { type: Number },
     phone_number: { type: Number },
   },

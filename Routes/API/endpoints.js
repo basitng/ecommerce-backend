@@ -5,8 +5,13 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../Controller/Product");
-const { VerifyTokenAndAuthorization } = require("./VerifyUser");
-const { order, updateOrder } = require("../Controller/Order");
+const { VerifyTokenAndAuthorization, VerifyAdmin } = require("./VerifyUser");
+const {
+  order,
+  updateOrder,
+  createOrder,
+  findOrder,
+} = require("../Controller/Order");
 const { sales, createSale, updateSale } = require("../Controller/admin/Sales");
 const { bill, createBill } = require("../Controller/admin/BillingAddress");
 const { createPhone, Phone } = require("../Controller/admin/Phone");
@@ -19,11 +24,25 @@ const {
 const { userProfile, userUpdateProfile } = require("../Controller/User");
 const { adminUpdatePassword } = require("../Controller/admin/Password");
 const { userUpdatePassword } = require("../Controller/Password");
+const { upload } = require("../../cloud");
+const {
+  getReview,
+  review,
+  getOneProductReviews,
+} = require("../Controller/Review");
+const { findProduct } = require("../Controller/findProduct");
+const { queryDB } = require("../Controller/SearchBar");
 
+// SEARCH FOR PRODUCTS
+AllAPI.get("/query/:id", queryDB);
+
+// products
 AllAPI.get("/", apiEndpoints);
-AllAPI.post("/product/create", VerifyTokenAndAuthorization, product);
+AllAPI.get("/product/find/:id", findProduct);
+AllAPI.post("/product/create", VerifyAdmin, upload.array("image"), product);
+
 AllAPI.get("/product", getProduct);
-AllAPI.put("/product/update/:id", VerifyTokenAndAuthorization, updateProduct);
+AllAPI.put("/product/update/:id", VerifyAdmin, updateProduct);
 AllAPI.delete(
   "/product/delete/:id",
   VerifyTokenAndAuthorization,
@@ -31,9 +50,10 @@ AllAPI.delete(
 );
 
 // Order
-AllAPI.get("/order/", VerifyTokenAndAuthorization, order);
-AllAPI.post("/order/create", VerifyTokenAndAuthorization, order);
-AllAPI.put("/order/update/:id", VerifyTokenAndAuthorization, updateOrder);
+AllAPI.get("/order/", order);
+AllAPI.get("/order/find/:id", findOrder);
+AllAPI.post("/order/create", createOrder);
+AllAPI.put("/order/update/:id", VerifyAdmin, updateOrder);
 
 // Sales
 AllAPI.get("/sales", VerifyTokenAndAuthorization, sales);
@@ -65,15 +85,13 @@ AllAPI.put(
   adminUpdateProfile
 );
 
-AllAPI.get("/user/profile/:id", VerifyTokenAndAuthorization, userProfile);
-AllAPI.post(
-  "/user/profile/password",
-  VerifyTokenAndAuthorization,
-  userUpdatePassword
-);
-AllAPI.put(
-  "/user/profile/update/:id",
-  VerifyTokenAndAuthorization,
-  userUpdateProfile
-);
+// Reviews
+AllAPI.get("/review", getReview);
+AllAPI.get("/review/:id", getOneProductReviews);
+AllAPI.post("/review/create", review);
+
+// USER PROFILE
+AllAPI.get("/user/profile/:id", userProfile);
+AllAPI.post("/user/profile/password", userUpdatePassword);
+AllAPI.put("/user/profile/update/:id", userUpdateProfile);
 module.exports = AllAPI;

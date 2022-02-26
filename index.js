@@ -1,32 +1,42 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const crypto = require("crypto");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+var cors = require("cors");
+const bodyParser = require("body-parser");
 
 const router = require("./Routes/API/auth");
 const AllAPI = require("./Routes/API/endpoints");
 const app = express();
 
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+
 // MIDDLEWARES
+
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.set("view engine", "ejs");
 app.use("/auth", router);
 app.use("/api", AllAPI);
-app.set("view engine", "ejs");
-app.use(cookieParser());
-dotenv.config();
 
-// CONFIGURATIONS
+dotenv.config();
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 const PORT = process.env.PORT || 5000;
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
-    connectTimeoutMS: 50000,
   })
   .then(() => {
     console.log("Database Connected  Successfully");
     app.listen(PORT, () =>
-      console.log("> ======= Server started at port =========<", PORT)
+      console.log(`> ======= Server started at port ${PORT} =========<`)
     );
   })
   .catch((e) => console.log("Server Error", e));

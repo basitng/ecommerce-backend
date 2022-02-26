@@ -27,4 +27,14 @@ const VerifyTokenAndAuthorization = (req, res, next) => {
     }
   });
 };
-module.exports = { verifyToken, VerifyTokenAndAuthorization };
+
+const VerifyAdmin = (req, res, next) => {
+  verifyToken(req, res, () => {
+    if (req.user.isAdmin) {
+      next();
+    } else {
+      res.status(401).json("You are not allowed to view this endpoint");
+    }
+  });
+};
+module.exports = { verifyToken, VerifyTokenAndAuthorization, VerifyAdmin };

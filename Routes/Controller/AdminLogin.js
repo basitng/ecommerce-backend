@@ -1,4 +1,4 @@
-const jsonwebtoken = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const User = require("../../Models/User");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -22,15 +22,19 @@ const handleAdminLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.loginUser(email, password);
+    console.log(user.isAdmin);
+    if (user.isAdmin) {
+      const accessToken = jwt.sign(
+        { id: user._id, isAdmin: user.isAdmin },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "3d",
+        }
+      );
 
-    const accessToken = jwt.sign(
-      { id: user._id, isAdmin: user.isAdmin },
-      process.env.SECRET_KEY,
-      {
-        expiresIn: "3d",
-      }
-    );
-    res.status(201).send({ user, accessToken });
+      res.status(200).send({ user, accessToken });
+    }
+    res.status(401).json("Unauthorized request");
   } catch (error) {
     const message = handleErrors(error);
     res.status(400).send({ message });
