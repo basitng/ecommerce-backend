@@ -4,16 +4,15 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 var cors = require("cors");
 const bodyParser = require("body-parser");
+const corsOptions = {
+  origin: "https://ngeorgetech.com/",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 
 const router = require("./Routes/API/auth");
 const AllAPI = require("./Routes/API/endpoints");
 const app = express();
-
-const corsOptions = {
-  origin: "*",
-  credentials: true,
-  optionSuccessStatus: 200,
-};
 
 // MIDDLEWARES
 
