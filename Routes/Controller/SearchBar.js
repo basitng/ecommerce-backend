@@ -7,8 +7,6 @@ module.exports.queryDB = async (req, res) => {
     data.forEach((docs) => {
       if (docs.name.indexOf(query, -1)) {
         res.status(200).json(data);
-      } else {
-        res.status(201).json({ message: "OOPS NO SUCH DATA" });
       }
     });
   } catch (error) {
