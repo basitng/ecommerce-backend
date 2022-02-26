@@ -41,57 +41,57 @@ AllAPI.get("/", apiEndpoints);
 AllAPI.get("/product/find/:id", findProduct);
 AllAPI.post("/product/create", VerifyAdmin, upload.array("image"), product);
 
-AllAPI.get("/product", getProduct);
-AllAPI.put("/product/update/:id", VerifyAdmin, updateProduct);
-AllAPI.delete(
-  "/product/delete/:id",
-  VerifyTokenAndAuthorization,
-  deleteProduct
-);
+// AllAPI.get("/product", getProduct);
+// AllAPI.put("/product/update/:id", VerifyAdmin, updateProduct);
+// AllAPI.delete(
+//   "/product/delete/:id",
+//   VerifyTokenAndAuthorization,
+//   deleteProduct
+// );
 
-// Order
-AllAPI.get("/order/", order);
-AllAPI.get("/order/find/:id", findOrder);
-AllAPI.post("/order/create", createOrder);
-AllAPI.put("/order/update/:id", VerifyAdmin, updateOrder);
+// // Order
+// AllAPI.get("/order/", order);
+// AllAPI.get("/order/find/:id", findOrder);
+// AllAPI.post("/order/create", createOrder);
+// AllAPI.put("/order/update/:id", VerifyAdmin, updateOrder);
 
-// Sales
-AllAPI.get("/sales", VerifyTokenAndAuthorization, sales);
-AllAPI.post("/sales/create", VerifyTokenAndAuthorization, createSale);
-AllAPI.put("/sales/update/:id", VerifyTokenAndAuthorization, updateSale);
+// // Sales
+// AllAPI.get("/sales", VerifyTokenAndAuthorization, sales);
+// AllAPI.post("/sales/create", VerifyTokenAndAuthorization, createSale);
+// AllAPI.put("/sales/update/:id", VerifyTokenAndAuthorization, updateSale);
 
-//Billing
-AllAPI.get("/billing", VerifyTokenAndAuthorization, bill);
-AllAPI.post("/billing/create", VerifyTokenAndAuthorization, createBill);
+// //Billing
+// AllAPI.get("/billing", VerifyTokenAndAuthorization, bill);
+// AllAPI.post("/billing/create", VerifyTokenAndAuthorization, createBill);
 
-//Phone
-AllAPI.get("/phone", VerifyTokenAndAuthorization, Phone);
-AllAPI.post("/phone/create", VerifyTokenAndAuthorization, createPhone);
+// //Phone
+// AllAPI.get("/phone", VerifyTokenAndAuthorization, Phone);
+// AllAPI.post("/phone/create", VerifyTokenAndAuthorization, createPhone);
 
-//Phone
-AllAPI.get("/policy", VerifyTokenAndAuthorization, policy);
-AllAPI.post("/policy/create", VerifyTokenAndAuthorization, createPolicy);
+// //Phone
+// AllAPI.get("/policy", VerifyTokenAndAuthorization, policy);
+// AllAPI.post("/policy/create", VerifyTokenAndAuthorization, createPolicy);
 
-// Admin
-AllAPI.get("/admin/profile/:id", VerifyTokenAndAuthorization, adminProfile);
-AllAPI.post(
-  "/admin/profile/password",
-  VerifyTokenAndAuthorization,
-  adminUpdatePassword
-);
-AllAPI.put(
-  "/admin/profile/update/:id",
-  VerifyTokenAndAuthorization,
-  adminUpdateProfile
-);
+// // Admin
+// AllAPI.get("/admin/profile/:id", VerifyTokenAndAuthorization, adminProfile);
+// AllAPI.post(
+//   "/admin/profile/password",
+//   VerifyTokenAndAuthorization,
+//   adminUpdatePassword
+// );
+// AllAPI.put(
+//   "/admin/profile/update/:id",
+//   VerifyTokenAndAuthorization,
+//   adminUpdateProfile
+// );
 
-// Reviews
-AllAPI.get("/review", getReview);
-AllAPI.get("/review/:id", getOneProductReviews);
-AllAPI.post("/review/create", review);
+// // Reviews
+// AllAPI.get("/review", getReview);
+// AllAPI.get("/review/:id", getOneProductReviews);
+// AllAPI.post("/review/create", review);
 
-// USER PROFILE
-AllAPI.get("/user/profile/:id", userProfile);
-AllAPI.post("/user/profile/password", userUpdatePassword);
-AllAPI.put("/user/profile/update/:id", userUpdateProfile);
+// // USER PROFILE
+// AllAPI.get("/user/profile/:id", userProfile);
+// AllAPI.post("/user/profile/password", userUpdatePassword);
+// AllAPI.put("/user/profile/update/:id", userUpdateProfile);
 module.exports = AllAPI;
