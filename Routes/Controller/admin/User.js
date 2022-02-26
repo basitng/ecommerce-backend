@@ -6,9 +6,10 @@ module.exports.adminProfile = async (req, res) => {
 
     if (data.isAdmin) {
       res.status(200).json({ data });
-    } else {
-      res.status(401).json("Request denied");
     }
+    // else {
+    //   res.status(401).json("Request denied");
+    // }
   } catch (error) {
     res.status(400).json(error.message);
   }
