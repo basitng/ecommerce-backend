@@ -16,6 +16,7 @@ module.exports.findOrder = async (req, res) => {
 
     res.status(200).json({
       orders: orders.length,
+      ordersRaw: orders,
       pending: pending.length,
       delivered: delivered.length,
     });
