@@ -13,7 +13,7 @@ const verifyToken = (req, res, next) => {
       next();
     });
   } else {
-    return res.status(401).json("User not authenticated");
+    res.status(401).json("User not authenticated");
   }
 };
 
