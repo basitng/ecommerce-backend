@@ -18,11 +18,16 @@ const OrderSchema = mongoose.Schema(
       required: true,
     },
     amt: {
-      type: String,
+      type: Number,
+      required: true,
+    },
+    shipping: {
+      type: Number,
       required: true,
     },
     status: { type: Boolean, default: false },
-    date: { type: String, default: () => moment().format("dddd") },
+    month: { type: String, default: () => moment().format("MMMM") },
+    day: { type: String, default: () => moment().isoWeekday() },
   },
   { timestamps: true }
 );

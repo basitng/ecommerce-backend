@@ -34,7 +34,7 @@ const handleAdminLogin = async (req, res) => {
 
       res.status(200).send({ user, accessToken });
     }
-    // res.status(401).json("Unauthorized request");
+    res.status(401).json("Unauthorized request");
   } catch (error) {
     const message = handleErrors(error);
     res.status(400).send({ message });

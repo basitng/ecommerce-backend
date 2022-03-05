@@ -25,7 +25,8 @@ module.exports.findOrder = async (req, res) => {
   }
 };
 module.exports.createOrder = async (req, res) => {
-  const { userID, productId, address, junction, phone, amt, status } = req.body;
+  const { userID, productId, shipping, address, junction, phone, amt, status } =
+    req.body;
   try {
     const data = await Order.create({
       userID,
@@ -35,6 +36,7 @@ module.exports.createOrder = async (req, res) => {
       junction,
       phone,
       status,
+      shipping,
     });
     res.status(200).json(data);
   } catch (error) {

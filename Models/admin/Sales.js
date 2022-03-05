@@ -5,7 +5,7 @@ const SaleSchema = mongoose.Schema(
   {
     total_sold_today: Number,
     total_sold_this_month: Number,
-    date: { type: String, default: () => moment().format("dddd") },
+    date: { type: String, default: () => moment() },
   },
   { timestamps: true }
 );

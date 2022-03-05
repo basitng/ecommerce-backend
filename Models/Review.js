@@ -18,7 +18,7 @@ const ReviewSchema = mongoose.Schema({
   },
   date: {
     type: String,
-    default: moment().format("dddd"),
+    default: moment(),
   },
 });
 

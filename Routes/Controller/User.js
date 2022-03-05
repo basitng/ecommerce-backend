@@ -1,14 +1,35 @@
 const User = require("../../Models/User");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const Order = require("../../Models/Order");
+const Product = require("../../Models/Product");
 dotenv.config();
+
+module.exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    const orders = await Order.find();
+    const sales = await Order.find();
+    const products = await Product.find();
+
+    res.status(200).json({
+      rawUser: users,
+      users: users.length,
+      orders: orders.length,
+      sales: sales.length,
+      products: products.length,
+    });
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
 
 module.exports.userProfile = async (req, res) => {
   try {
     const data = await User.findById(req.params.id);
 
     if (!data.isAdmin) {
-      res.status(200).json({ data });
+      res.status(200).json(data);
     }
     // else {
     //   res.status(401).json("Request denied");

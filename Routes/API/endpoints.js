@@ -21,7 +21,11 @@ const {
   adminProfile,
   adminUpdateProfile,
 } = require("../Controller/admin/User");
-const { userProfile, userUpdateProfile } = require("../Controller/User");
+const {
+  userProfile,
+  userUpdateProfile,
+  getAllUsers,
+} = require("../Controller/User");
 const { adminUpdatePassword } = require("../Controller/admin/Password");
 const { userUpdatePassword } = require("../Controller/Password");
 const { upload } = require("../../cloud");
@@ -42,7 +46,7 @@ AllAPI.get("/product/find/:id", findProduct);
 AllAPI.post("/product/create", VerifyAdmin, upload.array("image"), product);
 
 AllAPI.get("/product", getProduct);
-AllAPI.put("/product/update/:id", VerifyAdmin, updateProduct);
+AllAPI.put("/product/update/:id", upload.array("image"), updateProduct);
 AllAPI.delete(
   "/product/delete/:id",
   VerifyTokenAndAuthorization,
@@ -53,7 +57,7 @@ AllAPI.delete(
 AllAPI.get("/order/", order);
 AllAPI.get("/order/find/:id", findOrder);
 AllAPI.post("/order/create", createOrder);
-AllAPI.put("/order/update/:id", VerifyAdmin, updateOrder);
+AllAPI.put("/order/update/:id", updateOrder);
 
 // Sales
 AllAPI.get("/sales", VerifyTokenAndAuthorization, sales);
@@ -91,6 +95,7 @@ AllAPI.get("/review/:id", getOneProductReviews);
 AllAPI.post("/review/create", review);
 
 // USER PROFILE
+AllAPI.get("/users", getAllUsers);
 AllAPI.get("/user/profile/:id", userProfile);
 AllAPI.post("/user/profile/password", userUpdatePassword);
 AllAPI.put("/user/profile/update/:id", userUpdateProfile);
