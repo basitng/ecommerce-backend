@@ -41,7 +41,7 @@ const handlerRegister = async (req, res) => {
         expiresIn: "3d",
       }
     );
-    res.status(201).send({ user, accessToken });
+    res.status(201).json({ user, accessToken });
   } catch (error) {
     const respones = handleErrors(error);
     res.status(400).send({ respones });

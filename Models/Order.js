@@ -25,9 +25,17 @@ const OrderSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    status: { type: Boolean, default: false },
-    month: { type: String, default: () => moment().format("MMMM") },
-    day: { type: String, default: () => moment().isoWeekday() },
+    status: { immutable: true, type: Boolean, default: false },
+    month: {
+      immutable: true,
+      type: String,
+      default: () => moment().format("MMMM"),
+    },
+    day: {
+      immutable: true,
+      type: String,
+      default: () => moment().isoWeekday(),
+    },
   },
   { timestamps: true }
 );

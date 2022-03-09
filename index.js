@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const cookieSession = require("cookie-session");
 var cors = require("cors");
 const bodyParser = require("body-parser");
 
@@ -14,10 +15,17 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 };
-// MIDDLEWARES
 
+// MIDDLEWARES
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(
+  cookieSession({
+    name: "session",
+    keys: [process.env.MONGO_URL],
+    maxAge: 24 * 60 * 60 * 100,
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());

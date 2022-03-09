@@ -11,8 +11,9 @@ const {
   updateOrder,
   createOrder,
   findOrder,
+  findOneOnly,
 } = require("../Controller/Order");
-const { sales, createSale, updateSale } = require("../Controller/admin/Sales");
+const { sales } = require("../Controller/admin/Sales");
 const { bill, createBill } = require("../Controller/admin/BillingAddress");
 const { createPhone, Phone } = require("../Controller/admin/Phone");
 const { createPolicy, policy } = require("../Controller/admin/Policy");
@@ -36,6 +37,7 @@ const {
 } = require("../Controller/Review");
 const { findProduct } = require("../Controller/findProduct");
 const { queryDB } = require("../Controller/SearchBar");
+const router = require("./auth");
 
 // SEARCH FOR PRODUCTS
 AllAPI.get("/query/:id", queryDB);
@@ -55,14 +57,13 @@ AllAPI.delete(
 
 // Order
 AllAPI.get("/order/", order);
+AllAPI.get("/order/find/1/:id", findOneOnly);
 AllAPI.get("/order/find/:id", findOrder);
 AllAPI.post("/order/create", createOrder);
 AllAPI.put("/order/update/:id", updateOrder);
 
 // Sales
-AllAPI.get("/sales", VerifyTokenAndAuthorization, sales);
-AllAPI.post("/sales/create", VerifyTokenAndAuthorization, createSale);
-AllAPI.put("/sales/update/:id", VerifyTokenAndAuthorization, updateSale);
+AllAPI.get("/sales", sales);
 
 //Billing
 AllAPI.get("/billing", VerifyTokenAndAuthorization, bill);

@@ -8,6 +8,7 @@ module.exports.order = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 module.exports.findOrder = async (req, res) => {
   try {
     const orders = await Order.find({ userID: req.params.id });
@@ -20,6 +21,14 @@ module.exports.findOrder = async (req, res) => {
       pending: pending.length,
       delivered: delivered.length,
     });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+module.exports.findOneOnly = async (req, res) => {
+  try {
+    const data = await Order.findOne({ _id: req.params.id });
+    res.status(200).json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
