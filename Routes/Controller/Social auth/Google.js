@@ -1,5 +1,10 @@
 const dotenv = require("dotenv");
+const { OAuth2Client } = require("google-auth-library");
+
 dotenv.config();
+const client = new OAuth2Client(
+  "780011623530-fmi7vidcfepaa24lji0883na8vqjmn86.apps.googleusercontent.com"
+);
 const jwt = require("jsonwebtoken");
 const User = require("../../../Models/User");
 
@@ -27,12 +32,22 @@ module.exports.googleLogin = async (req, res) => {
 };
 
 module.exports.googleRegister = async (req, res) => {
-  const { email, username, password } = req.body;
+  const { googleId } = req.body;
   try {
     const data = await User.findOne({ email });
-    console.log(`---- ${(email, password, username)}`);
+    const ticket = await client.verifyIdToken({
+      idToken: googleId,
+      audience:
+        "780011623530-fmi7vidcfepaa24lji0883na8vqjmn86.apps.googleusercontent.com",
+    });
+    console.log(ticket.getPayload());
+    const { name, email, picture } = ticket.getPayload();
     if (data == null) {
-      const user = await User.create({ email, password, username });
+      const user = await User.create({
+        email: email,
+        password: name + email,
+        username: name,
+      });
       const accessToken = jwt.sign(
         { id: user._id, isAdmin: user.isAdmin },
         process.env.SECRET_KEY,
