@@ -6,7 +6,8 @@ module.exports.all = async (req, res) => {
     const users = await User.find();
     const orders = await Order.find();
     const products = await Product.find();
-    const sales = orders ? orders.reduce((a, b) => a.amt + b.amt) : "";
+    const sales =
+      orders.length > 0 ? orders.reduce((a, b) => a.amt + b.amt) : "";
     res.status(200).json({
       sales: sales,
       usersRaw: users,
