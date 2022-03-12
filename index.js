@@ -43,7 +43,7 @@ mongoose
   .then(() => {
     console.log("Database Connected  Successfully");
     app.listen(PORT, () =>
-      console.log(`> ======= Server started at port ${PORT} =========<`)
+      console.log(`> ======= Server started at port ${PORT} 👌👌 =========<`)
     );
   })
   .catch((e) => console.log("Server Error", e));

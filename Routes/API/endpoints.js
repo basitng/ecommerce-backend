@@ -37,12 +37,13 @@ const {
 } = require("../Controller/Review");
 const { findProduct } = require("../Controller/findProduct");
 const { queryDB } = require("../Controller/SearchBar");
-const router = require("./auth");
+const { all } = require("../Controller/admin/All");
 
 // SEARCH FOR PRODUCTS
 AllAPI.get("/query/:id", queryDB);
 
 // products
+AllAPI.get("/get/all", all);
 AllAPI.get("/", apiEndpoints);
 AllAPI.get("/product/find/:id", findProduct);
 AllAPI.post("/product/create", VerifyAdmin, upload.array("image"), product);
