@@ -12,42 +12,31 @@ module.exports.googleLogin = async (req, res) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email });
-    if (user) {
-      const accessToken = jwt.sign(
-        { id: user._id, isAdmin: user.isAdmin },
-        process.env.SECRET_KEY,
-        {
-          expiresIn: "3d",
-        }
-      );
-      console.log(user);
-      res.status(200).json({ user, accessToken });
-    } else {
-      console.log("--------- Email doesn't exists ---------");
-      res.status(400).json("Email doesn't exists");
-    }
+    const accessToken = await jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.SECRET_KEY,
+      {
+        expiresIn: "3d",
+      }
+    );
+    console.log(user);
+    res.status(200).json({ user, accessToken });
   } catch (error) {
     res.status(400).json(error);
   }
 };
 
 module.exports.googleRegister = async (req, res) => {
-  const { googleId } = req.body;
+  const { tokenId } = req.body;
   try {
     const ticket = await client.verifyIdToken({
-      idToken: googleId,
+      idToken: tokenId,
       audience:
         "780011623530-fmi7vidcfepaa24lji0883na8vqjmn86.apps.googleusercontent.com",
     });
-    console.log(
-      ">---------------------------------------------------------------------------------------------------------",
-      googleId
-    );
-    const { name, email } = ticket.getPayload();
-    console.log(
-      ">---------------------------------------------------------------------------------------------------------",
-      email
-    );
+
+    const { name, email } = await ticket.getPayload();
+
     const user = await User.create({
       email: email,
       password: name + email,
