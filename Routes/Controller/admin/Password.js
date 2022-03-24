@@ -1,9 +1,10 @@
 const User = require("../../../Models/User");
 
 module.exports.adminUpdatePassword = async (req, res) => {
-  const { id, newPassword, oldPassword } = req.body;
   try {
+    const { id, newPassword, oldPassword } = req.body;
     const user = await User.findById(id);
+    console.log(newPassword, oldPassword, id);
     if (user.isAdmin) {
       const data = await User.changePassword(id, oldPassword, newPassword);
       res.status(200).json({ data });

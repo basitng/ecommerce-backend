@@ -57,7 +57,7 @@ module.exports.updateOrder = async (req, res) => {
     const data = await Order.findByIdAndUpdate(
       req.params.id,
       {
-        $set: req.body,
+        status: req.body.status,
       },
       { new: true }
     );

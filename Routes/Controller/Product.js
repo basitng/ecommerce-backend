@@ -50,6 +50,16 @@ module.exports.getProduct = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+module.exports.getProductForMe = async (req, res) => {
+  const { ids } = req.body;
+  try {
+    const Data = await Product.find().where("_id").in(ids).exec();
+
+    res.status(200).json(Data);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 module.exports.deleteProduct = async (req, res) => {
   try {
     const data = await Product.findByIdAndDelete(req.params.id);

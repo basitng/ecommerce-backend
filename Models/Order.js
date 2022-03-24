@@ -25,7 +25,7 @@ const OrderSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    status: { immutable: true, type: Boolean, default: false },
+    status: { type: Boolean, default: false },
     month: {
       immutable: true,
       type: String,
