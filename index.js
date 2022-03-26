@@ -1,10 +1,10 @@
 const express = require("express");
+var cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const app = express();
-var cors = require("cors");
 const corsOptions = {
   origin: "*",
   credentials: true,
