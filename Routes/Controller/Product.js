@@ -24,7 +24,8 @@ module.exports.product = async (req, res) => {
     res.setHeader("Content-Type", "multipart/form-data");
     res.status(200).json(data);
   } catch (error) {
-    res.status(400).json(error);
+    console.log(error);
+    res.status(400).json("SERVER ERROR GUY. THIS IS FROM DB", error);
   }
 };
 
