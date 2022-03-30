@@ -5,6 +5,7 @@ module.exports.product = async (req, res) => {
   const { name, desc, price, category, brand, discount } = req.body;
 
   try {
+    res.setHeader("Content-Type", "multipart/form-data");
     const files = req.files;
     const frontPic = files[0].path;
     const backPic = files[1].path;
