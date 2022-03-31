@@ -2,6 +2,7 @@ const express = require("express");
 var cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const app = express();
@@ -25,16 +26,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.set("view engine", "ejs");
-app.use("/auth", router);
-app.use("/api", AllAPI);
 
 dotenv.config();
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 const PORT = process.env.PORT || 5000;
 
-const bodyParser = require("body-parser");
 const router = require("./Routes/API/auth");
 const AllAPI = require("./Routes/API/endpoints");
+app.use("/auth", router);
+app.use("/api", AllAPI);
 
 mongoose
   .connect(process.env.MONGO_URL, {
